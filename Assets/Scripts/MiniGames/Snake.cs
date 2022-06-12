@@ -1,9 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using static UnityEngine.InputSystem.InputAction;
 
-enum Axis {XAxis, YAxis};
 
 public class Snake : MonoBehaviour 
 {
@@ -12,6 +12,7 @@ public class Snake : MonoBehaviour
 
     // Main game grid
     [SerializeField] private SnakeGameGrid _game;
+    [SerializeField] private PlayerInput _snakeInput;
 
     private Vector2 _diff;
     private bool shouldMove;
@@ -66,11 +67,20 @@ public class Snake : MonoBehaviour
     {
         _dir = Vector2.zero;
         shouldMove = false;
+        _snakeInput.DeactivateInput();
     }
 
     public void StartMovingSnake()
     {
         shouldMove = true;
+        _snakeInput.ActivateInput();
     }
 
+    public void ResetSnake()
+    {
+        gameObject.SendMessage("SetActive");
+        gameObject.SendMessage("ResetPosition");
+
+        StartMovingSnake();
+    }
 }
