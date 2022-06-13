@@ -4,6 +4,9 @@ using UnityEngine;
 
 public abstract class MiniGameBase : MonoBehaviour
 {
+    public delegate void MiniGameBaseEvents(MiniGameBase b);
+    public static MiniGameBaseEvents onPuzzleCompleted;
+
     public abstract void StartMiniGame();
 
     public abstract void StopMiniGame();

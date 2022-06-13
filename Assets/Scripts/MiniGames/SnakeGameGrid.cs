@@ -15,6 +15,8 @@ public class SnakeGameGrid : MiniGameBase
     [SerializeField] private Camera snakeCamera;
     [SerializeField] private Transform _startPoint;
     [SerializeField] private Transform _endPoint;
+    [SerializeField] private GameProperties _properties;
+    [SerializeField] private Snake _snake;
 
     private Camera _mainCamera;
     public Vector3 StartPosition => _startPoint.position;
@@ -33,7 +35,6 @@ public class SnakeGameGrid : MiniGameBase
         StartSolving();
     }
 
-
     public void StartSolving()
     {
         onStart?.Invoke();
@@ -44,6 +45,13 @@ public class SnakeGameGrid : MiniGameBase
         snakeCamera.gameObject.SetActive(false);
     }
 
+    public void Complete()
+    {
+        onPuzzleCompleted?.Invoke(this);
+        _properties.completedGames += 1;
+        StopMiniGame();
+    }
+
     public override void StartMiniGame()
     {
         StartCoroutine(StartCycle());
@@ -51,12 +59,14 @@ public class SnakeGameGrid : MiniGameBase
 
     public override void StopMiniGame()
     {
+        ResetGame();
         StopSolving();
         _mainCamera.gameObject.SetActive(true);
+        onStop?.Invoke();
     }
 
     public override void ResetGame()
     {
-        throw new System.NotImplementedException();
+        onReset?.Invoke();
     }
 }

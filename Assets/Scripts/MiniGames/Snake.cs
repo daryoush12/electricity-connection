@@ -16,12 +16,14 @@ public class Snake : MonoBehaviour
 
     private Vector2 _diff;
     private bool shouldMove;
+    private Vector3 _original;
 
     public Vector3 CurrentDirection => _dir;
 
     private void Awake()
     {
-         //Set direction to 0,0
+        //Set direction to 0,0
+        _original = transform.position;
         _dir = Vector2.right;
         shouldMove = false;
     }
@@ -31,6 +33,7 @@ public class Snake : MonoBehaviour
         _game.onStart += StartMovingSnake;
         _game.onStop += StopSnake;
         _game.onReset += ResetSnake;
+        _game.onSolved += StopSnake;
     }
 
     private void OnDisable()
@@ -38,6 +41,7 @@ public class Snake : MonoBehaviour
         _game.onStart -= StartMovingSnake;
         _game.onStop -= StopSnake;
         _game.onReset -= ResetSnake;
+        _game.onSolved -= StopSnake;
     }
 
     private void FixedUpdate()
@@ -73,10 +77,12 @@ public class Snake : MonoBehaviour
         _dir = Vector2.zero;
         shouldMove = false;
         _snakeInput.DeactivateInput();
+        
     }
 
     public void StartMovingSnake()
     {
+        _dir = Vector2.right;
         shouldMove = true;
         _snakeInput.ActivateInput();
     }
@@ -85,7 +91,7 @@ public class Snake : MonoBehaviour
     {
         gameObject.SendMessage("SetActive");
         gameObject.SendMessage("ResetPosition");
-
-        StartMovingSnake();
+        _dir = Vector2.right;
+        //StartMovingSnake();
     }
 }

@@ -64,8 +64,9 @@ public class GameSelector : MonoBehaviour
 
     public void SelectMiniGame(CallbackContext context)
     {
+        if (!context.performed || current == null) return;
+
         Debug.Log($"Select minigame {current.name}");
-        
-        current.GetComponent<PuzzlePointer>().OpenPuzzle();
+        current.SendMessage("OpenPuzzle");
     }
 }

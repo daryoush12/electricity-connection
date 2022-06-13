@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class MiniGameManager : MonoBehaviour
 {
-    private Transform currentlyActive;
 
+    [SerializeField] private GameProperties gameProperties;
+
+    private void Start()
+    {
+        gameProperties.completedGames = 0;
+    }
 }

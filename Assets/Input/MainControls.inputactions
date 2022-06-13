@@ -79,6 +79,34 @@
                     "isPartOfComposite": false
                 }
             ]
+        },
+        {
+            "name": "Menu",
+            "id": "375d2cb4-bbe9-49f3-b00b-3be4817601d5",
+            "actions": [
+                {
+                    "name": "Start",
+                    "type": "Button",
+                    "id": "ff665098-04f5-4181-aced-09ef187a944a",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "e41e3c66-c491-420a-873a-efaf24a5e91b",
+                    "path": "<Keyboard>/enter",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Start",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": []

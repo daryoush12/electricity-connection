@@ -11,4 +11,9 @@ public class PuzzlePointer : MonoBehaviour
         Debug.Log("Invoke puzzle");
         _puzzle.StartMiniGame();
     }
+
+    public void ClosePuzzle()
+    {
+        _puzzle.StopMiniGame();
+    }
 }

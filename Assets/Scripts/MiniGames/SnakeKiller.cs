@@ -13,9 +13,7 @@ public class SnakeKiller : MonoBehaviour
             
             collision.transform.position = collision.transform.position + 
                 (collision.transform.GetComponent<Snake>().CurrentDirection);
-            collision.gameObject.SendMessage("KillSnake");
-            game.onFail.Invoke();
-
+            game.onReset?.Invoke();
         }        
     }
 }
