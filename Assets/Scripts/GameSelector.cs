@@ -29,8 +29,6 @@ public class GameSelector : MonoBehaviour
 
     private void FixedUpdate()
     {
-        
-      
         HighlightMiniGame();
     }
 
@@ -42,16 +40,22 @@ public class GameSelector : MonoBehaviour
     public void HighlightMiniGame()
     {
         Physics.Raycast(m_Camera.ScreenPointToRay(m_Position), out info, 10F, gameMask);
-        if (info.collider == null) current.SendMessage("CancelHighlight");
-        if (info.collider.transform == current) current.SendMessage("HighlightObject");
+        if (info.collider == null && current == null) return;
 
+        if (info.collider == null && current != null) {
+            current.SendMessage("CancelHighlight");
+            current = null;
+            return; 
+        }
 
-        if (current != null && current != info.collider.transform)
+        else if (current != null && current != info.collider.transform)
         {
             current.SendMessage("CancelHighlight");
             current = info.collider.transform;
             current.SendMessage("HighlightObject");
-        }else
+        }
+               
+        else
         {  
             current = info.collider.transform;
             current.SendMessage("HighlightObject");
@@ -60,6 +64,8 @@ public class GameSelector : MonoBehaviour
 
     public void SelectMiniGame(CallbackContext context)
     {
-        if(!context.performed) current.SendMessage("StartSolving");
+        Debug.Log($"Select minigame {current.name}");
+        
+        current.GetComponent<PuzzlePointer>().OpenPuzzle();
     }
 }

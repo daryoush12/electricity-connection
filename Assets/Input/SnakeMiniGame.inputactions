@@ -72,6 +72,34 @@
                     "isPartOfComposite": true
                 }
             ]
+        },
+        {
+            "name": "SnakeGeneral",
+            "id": "1221ec2a-88b4-41e5-b9ad-1713a3fa6124",
+            "actions": [
+                {
+                    "name": "StopSolving",
+                    "type": "Button",
+                    "id": "68b8cb6b-1c40-4ab0-8cbb-06cda647a4db",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "250ddaef-b2b5-4de4-bcdb-8de1d82a917a",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "StopSolving",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": []

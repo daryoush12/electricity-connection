@@ -13,13 +13,13 @@ public class ObjectHighlihter : MonoBehaviour
 
     public void HighlightObject()
     {
-       // _r.OutlineTint.a = 255;
+        _r.enabled = true;
         onHighlight?.Invoke();
     }
 
     public void CancelHighlight()
     {
-       // _r.OutlineTint.a = 0;
+        _r.enabled = false;
         onCancel?.Invoke();
     }
 }

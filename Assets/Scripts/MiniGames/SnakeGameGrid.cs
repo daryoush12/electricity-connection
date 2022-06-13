@@ -2,28 +2,61 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SnakeGameGrid : MonoBehaviour
+public class SnakeGameGrid : MiniGameBase
 {
     public delegate void SnakeGameEvents();
     public SnakeGameEvents onSolved;
     public SnakeGameEvents onFail;
     public SnakeGameEvents onStart;
     public SnakeGameEvents onStop;
+    public SnakeGameEvents onReset;
+    
 
     [SerializeField] private Camera snakeCamera;
     [SerializeField] private Transform _startPoint;
     [SerializeField] private Transform _endPoint;
 
+    private Camera _mainCamera;
     public Vector3 StartPosition => _startPoint.position;
+
+    private void OnEnable()
+    {
+        _mainCamera = Camera.main;
+        snakeCamera.gameObject.SetActive(false);
+    }
+
+    private IEnumerator StartCycle()
+    {
+        snakeCamera.gameObject.SetActive(true);
+        _mainCamera.gameObject.SetActive(false);
+        yield return new WaitForSeconds(1F);
+        StartSolving();
+    }
+
 
     public void StartSolving()
     {
-        snakeCamera.gameObject.SetActive(true);
         onStart?.Invoke();
     }
 
     public void StopSolving()
     {
         snakeCamera.gameObject.SetActive(false);
+    }
+
+    public override void StartMiniGame()
+    {
+        StartCoroutine(StartCycle());
+    }
+
+    public override void StopMiniGame()
+    {
+        StopSolving();
+        _mainCamera.gameObject.SetActive(true);
+    }
+
+    public override void ResetGame()
+    {
+        throw new System.NotImplementedException();
     }
 }

@@ -23,17 +23,21 @@ public class Snake : MonoBehaviour
     {
          //Set direction to 0,0
         _dir = Vector2.right;
-        shouldMove = true;
+        shouldMove = false;
     }
 
     private void OnEnable()
     {
         _game.onStart += StartMovingSnake;
+        _game.onStop += StopSnake;
+        _game.onReset += ResetSnake;
     }
 
     private void OnDisable()
     {
         _game.onStart -= StartMovingSnake;
+        _game.onStop -= StopSnake;
+        _game.onReset -= ResetSnake;
     }
 
     private void FixedUpdate()
@@ -45,7 +49,8 @@ public class Snake : MonoBehaviour
 
     private void MoveSnake()
     {
-        transform.position += _dir * Time.deltaTime;
+        if (shouldMove)
+            transform.position += _dir * Time.deltaTime;
     }
 
     public void ReadMovementInput(CallbackContext context)
