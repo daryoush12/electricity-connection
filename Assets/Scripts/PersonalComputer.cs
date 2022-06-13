@@ -11,7 +11,7 @@ public class PersonalComputer : MonoBehaviour
     [SerializeField] private TextMeshProUGUI screen;
     [SerializeField] private Collider col;
 
-    public int Progress => (gameProperties.completedGames / gameProperties.totalGames) * 100;
+    
 
     private void OnEnable()
     {
@@ -37,7 +37,7 @@ public class PersonalComputer : MonoBehaviour
 
     private void UpdateProgress()
     {
-        SetText($"Progress {Progress} %");
+        SetText($"{gameProperties.Progress} %");
     }
 
     private void DisableCollision()
