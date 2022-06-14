@@ -48,6 +48,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _puzzle: {fileID: 0}
+  onInteraction:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &4920379319051308973
 MonoBehaviour:
   m_ObjectHideFlags: 0

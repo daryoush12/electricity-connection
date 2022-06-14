@@ -13,6 +13,9 @@ public class Snake : MonoBehaviour
     // Main game grid
     [SerializeField] private SnakeGameGrid _game;
     [SerializeField] private PlayerInput _snakeInput;
+    [Range(0f, 5F)]
+    [SerializeField] private float _speecModifier;
+    [SerializeField] private Rigidbody2D _rb;
 
     private Vector2 _diff;
     private bool shouldMove;
@@ -44,17 +47,10 @@ public class Snake : MonoBehaviour
         _game.onSolved -= StopSnake;
     }
 
-    private void FixedUpdate()
-    {
-        //Snake head can move into given direction only if body is not there.
-        MoveSnake();
-        
-    }
-
     private void MoveSnake()
     {
         if (shouldMove)
-            transform.position += _dir * Time.deltaTime;
+            _rb.velocity = _dir * _speecModifier;
     }
 
     public void ReadMovementInput(CallbackContext context)
@@ -69,6 +65,9 @@ public class Snake : MonoBehaviour
 
 
         _dir = newDir;
+
+        //Snake head can move into given direction only if body is not there.
+        MoveSnake();
         Debug.Log($"Direction: {_dir}");
     }
 
@@ -85,6 +84,8 @@ public class Snake : MonoBehaviour
         _dir = Vector2.right;
         shouldMove = true;
         _snakeInput.ActivateInput();
+        //Snake head can move into given direction only if body is not there.
+        MoveSnake();
     }
 
     public void ResetSnake()

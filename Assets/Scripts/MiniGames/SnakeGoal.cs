@@ -10,6 +10,12 @@ public class SnakeGoal : MonoBehaviour
     {
         if (collision.tag != "Snake") return;
         collision.SendMessage("SetConnected");
+        StartCoroutine(CompleteCycle());  
+    }
+
+    private IEnumerator CompleteCycle()
+    {
+        yield return new WaitForSeconds(0.5F);
         _game.Complete();
     }
 }

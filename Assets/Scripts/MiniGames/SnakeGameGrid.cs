@@ -17,6 +17,7 @@ public class SnakeGameGrid : MiniGameBase
     [SerializeField] private Transform _endPoint;
     [SerializeField] private GameProperties _properties;
     [SerializeField] private Snake _snake;
+    [SerializeField] private GameObject _grid;
 
     private Camera _mainCamera;
     public Vector3 StartPosition => _startPoint.position;
@@ -29,6 +30,7 @@ public class SnakeGameGrid : MiniGameBase
 
     private IEnumerator StartCycle()
     {
+        _grid.SetActive(true);
         snakeCamera.gameObject.SetActive(true);
         _mainCamera.gameObject.SetActive(false);
         yield return new WaitForSeconds(1F);
@@ -48,7 +50,7 @@ public class SnakeGameGrid : MiniGameBase
     public void Complete()
     {
         onPuzzleCompleted?.Invoke(this);
-        _properties.completedGames += 1;
+        _properties.IncrementCompletion();
         StopMiniGame();
     }
 
@@ -62,6 +64,7 @@ public class SnakeGameGrid : MiniGameBase
         ResetGame();
         StopSolving();
         _mainCamera.gameObject.SetActive(true);
+        _grid.SetActive(false);
         onStop?.Invoke();
     }
 

@@ -9,6 +9,6 @@ public class MiniGameManager : MonoBehaviour
 
     private void Start()
     {
-        gameProperties.completedGames = 0;
+        //gameProperties.completedGames = 0;
     }
 }

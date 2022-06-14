@@ -7,22 +7,16 @@ using UnityEngine.UI;
 public class PersonalComputer : MonoBehaviour
 {
     [SerializeField] private GameProperties gameProperties;
-    [SerializeField] private SnakeGameGrid SnakeGameGrid;
     [SerializeField] private TextMeshProUGUI screen;
-    [SerializeField] private Collider col;
-
-    
 
     private void OnEnable()
     {
-        gameProperties.onProgressChanged += UpdateProgress;
-        SnakeGameGrid.onSolved += DisableCollision;
+        gameProperties.onProgressChanged += UpdateProgress; 
     }
 
     private void OnDisable()
     {
         gameProperties.onProgressChanged -= UpdateProgress;
-        SnakeGameGrid.onSolved -= DisableCollision;
     }
 
     private void Start()
@@ -40,8 +34,4 @@ public class PersonalComputer : MonoBehaviour
         SetText($"{gameProperties.Progress} %");
     }
 
-    private void DisableCollision()
-    {
-        col.enabled = false;
-    }
 }
