@@ -19,6 +19,8 @@ public class SnakeGameGrid : MiniGameBase
     [SerializeField] private Snake _snake;
     [SerializeField] private GameObject _grid;
 
+    [SerializeField] private GeneralEvent onPuzzleSolved;
+
     private Camera _mainCamera;
     public Vector3 StartPosition => _startPoint.position;
 
@@ -50,6 +52,7 @@ public class SnakeGameGrid : MiniGameBase
     public void Complete()
     {
         onPuzzleCompleted?.Invoke(this);
+        onPuzzleSolved.InvokeEvent();
         _properties.IncrementCompletion();
         StopMiniGame();
     }

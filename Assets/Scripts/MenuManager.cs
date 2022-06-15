@@ -16,6 +16,12 @@ public class MenuManager : MonoBehaviour
         StartCoroutine(StartCycle());   
     }
 
+    public void QuitToDesktop()
+    {
+        if (Application.platform == RuntimePlatform.WebGLPlayer) return;
+        else Application.Quit();
+    }
+
     private IEnumerator StartCycle()
     {
         _source.PlayOneShot(startClip);

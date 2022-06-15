@@ -31,7 +31,7 @@ public class PersonalComputer : MonoBehaviour
 
     private void UpdateProgress()
     {
-        SetText($"{gameProperties.Progress} %");
+        SetText($"Current progress: {gameProperties.Progress} %");
     }
 
 }

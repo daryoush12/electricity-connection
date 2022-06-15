@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69bfae147fa4a4a47b83496cc68f12cc, type: 3}
   m_Name: MainProperties
   m_EditorClassIdentifier: 
-  completedGames: 0
-  totalGames: 4
+  completedGames: 2
+  totalGames: 2
