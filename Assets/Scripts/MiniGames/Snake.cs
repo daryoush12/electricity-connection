@@ -13,7 +13,7 @@ public class Snake : MonoBehaviour
     // Main game grid
     [SerializeField] private SnakeGameGrid _game;
     [SerializeField] private PlayerInput _snakeInput;
-    [Range(0f, 5F)]
+    [Range(0f, 25F)]
     [SerializeField] private float _speecModifier;
     [SerializeField] private Rigidbody2D _rb;
 
@@ -92,7 +92,6 @@ public class Snake : MonoBehaviour
     {
         gameObject.SendMessage("SetActive");
         gameObject.SendMessage("ResetPosition");
-        _dir = Vector2.right;
-        //StartMovingSnake();
+        StartMovingSnake();
     }
 }

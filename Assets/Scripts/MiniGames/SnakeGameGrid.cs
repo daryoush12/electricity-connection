@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class SnakeGameGrid : MiniGameBase
 {
@@ -20,6 +21,9 @@ public class SnakeGameGrid : MiniGameBase
     [SerializeField] private GameObject _grid;
 
     [SerializeField] private GeneralEvent onPuzzleSolved;
+    [SerializeField] private GeneralEvent onSnakeGameActive;
+    [SerializeField] private GeneralEvent onMainSceneActive;
+    [SerializeField] private UnityEvent onInteraction;
 
     private Camera _mainCamera;
     public Vector3 StartPosition => _startPoint.position;
@@ -34,7 +38,6 @@ public class SnakeGameGrid : MiniGameBase
     {
         _grid.SetActive(true);
         snakeCamera.gameObject.SetActive(true);
-        _mainCamera.gameObject.SetActive(false);
         yield return new WaitForSeconds(1F);
         StartSolving();
     }
@@ -59,6 +62,8 @@ public class SnakeGameGrid : MiniGameBase
 
     public override void StartMiniGame()
     {
+        onSnakeGameActive.InvokeEvent();
+        onInteraction?.Invoke();
         StartCoroutine(StartCycle());
     }
 
@@ -66,9 +71,9 @@ public class SnakeGameGrid : MiniGameBase
     {
         ResetGame();
         StopSolving();
-        _mainCamera.gameObject.SetActive(true);
         _grid.SetActive(false);
         onStop?.Invoke();
+        onMainSceneActive.InvokeEvent();
     }
 
     public override void ResetGame()
